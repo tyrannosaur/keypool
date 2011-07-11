@@ -23,6 +23,7 @@ arbitrary.
 ## Examples
 
 Let's say you're wrapping a timer function in some horrible API:
+
 ```python
       def timer(unique_name, **kwargs):
             ...
