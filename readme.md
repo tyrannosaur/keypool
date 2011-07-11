@@ -7,7 +7,7 @@ This package is meant for situations where keys for a dict are irrelevant or
 arbitrary.
 
 ## The basics
-
+```python
       from keypool import KeypoolDict
       items = KeypoolDict()
       
@@ -19,17 +19,18 @@ arbitrary.
       
       # Assign anything except an integer, like a normal dict
       items['hello'] = 'world'
-
+```
 ## Examples
 
 Let's say you're wrapping a timer function in some horrible API:
-
+```python
       def timer(unique_name, **kwargs):
             ...
+```
             
 and each active timer needs to be stored for efficient lookup (i.e. a dict)
 Usually a timestamp or uuid will suffice for this type of problem:
-
+```python
       import time
       
       timers = {}
@@ -40,10 +41,11 @@ Usually a timestamp or uuid will suffice for this type of problem:
             return key
 
       keys = [create_timer(...) for i in xrange(0, 10)]
+```
 
 Oops, the loop is iterating faster than time.time's precision and
 thus all keys are identical
-      
+```python      
       # [1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
       #  1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
       #  1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
@@ -51,9 +53,10 @@ thus all keys are identical
       print(keys)
       
       assert not all([keys[0] == key for key in keys])        
+```
             
 A KeypoolDict solves this problem in a cleaner fashion with unique interger keys:
-
+```python
       from keypool import KeypoolDict
       from operator import delitem
       
@@ -65,16 +68,18 @@ A KeypoolDict solves this problem in a cleaner fashion with unique interger keys
             return key
       
       keys = [create_timer(...) for i in xrange(0, 10)]
+```
 
 No keys are identical now!
-      
+```python     
       # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       print(keys)      
       
       assert all([x == y for x,y in zip(sorted(set(keys)), sorted(keys))])
+```
 
 Keys are also reused when deleted, so arbitrarily increasing values are mostly avoided:
-
+```python
       # Delete all the items
       [delitem(timers, key) for key in timers.keys()]
       
@@ -83,3 +88,4 @@ Keys are also reused when deleted, so arbitrarily increasing values are mostly a
       
       # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       print(keys)      
+```
