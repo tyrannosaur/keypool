@@ -34,7 +34,7 @@ When an item is deleted, its key is freed for reuse:
       print(keys)
 
       # Delete 0
-      del items[key[0]]
+      del items[keys[0]]
 
       # Add a new item
       key = items.setitem('dragonfly')
