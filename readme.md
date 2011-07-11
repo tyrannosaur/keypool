@@ -30,6 +30,7 @@ Let's say you're wrapping a timer function in some horrible API:
             
 and each active timer needs to be stored for efficient lookup (i.e. a dict)
 Usually a timestamp or uuid will suffice for this type of problem:
+
 ```python
       import time
       
@@ -45,6 +46,7 @@ Usually a timestamp or uuid will suffice for this type of problem:
 
 Oops, the loop is iterating faster than time.time's precision and
 thus all keys are identical
+
 ```python      
       # [1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
       #  1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
@@ -56,6 +58,7 @@ thus all keys are identical
 ```
             
 A KeypoolDict solves this problem in a cleaner fashion with unique interger keys:
+
 ```python
       from keypool import KeypoolDict
       from operator import delitem
@@ -71,6 +74,7 @@ A KeypoolDict solves this problem in a cleaner fashion with unique interger keys
 ```
 
 No keys are identical now!
+
 ```python     
       # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       print(keys)      
@@ -79,6 +83,7 @@ No keys are identical now!
 ```
 
 Keys are also reused when deleted, so arbitrarily increasing values are mostly avoided:
+
 ```python
       # Delete all the items
       [delitem(timers, key) for key in timers.keys()]
