@@ -1,10 +1,15 @@
 # keypool
 
-`keypool` is a collection of classes to generate and maintain a pool of unique integer keys.  
-Priority is given to reusing freed keys rather than generating new ones.
+`keypool` is a collection of classes to generate and maintain a pool of unique integer keys. Priority is given to reusing
+freed keys rather than generating new ones.
 
 This package is meant for situations where keys for a dict are irrelevant or
 arbitrary.
+
+## Installation
+
+Only `setuptools` and Python 2.6+ are required. Type `python setup.py install` to install. 
+If you want to run the tests, ensure `nose` is installed with `easy_install -U nose`.
 
 ## The basics
 ```python
