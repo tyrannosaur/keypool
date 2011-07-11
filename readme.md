@@ -1,10 +1,12 @@
-Classes and helpers to generate and maintain a pool of unique integer keys.  
+# keypool
+
+`keypool` is a collection of classes to generate and maintain a pool of unique integer keys.  
 Priority is given to reusing freed keys rather than generating new ones.
 
 This package is meant for situations where keys for a dict are irrelevant or
 arbitrary.
 
-The basics:
+## The basics
 
    from keypool import KeypoolDict
    items = KeypoolDict()
@@ -18,13 +20,15 @@ The basics:
    # Assign anything except an integer, like a normal dict
    items['hello'] = 'world'
 
-For example, let's say you're wrapping a timer function in some horrible API:
+## Examples
+
+Let's say you're wrapping a timer function in some horrible API:
 
    def timer(unique_name, **kwargs):
       ...
       
-and each active timer needs to be stored. Usually a timestamp or uuid will
-suffice for this type of problem:
+and each active timer needs to be stored for efficient lookup (i.e. a dict)
+Usually a timestamp or uuid will suffice for this type of problem:
 
    import time
    
@@ -35,13 +39,20 @@ suffice for this type of problem:
       timers[key] = timer(unique_name=key, **kwargs)
       return key
 
-   # Oops, the loop is iterating faster than time.time's precision   
    keys = [create_timer(...) for i in xrange(0, 10)]
+
+Oops, the loop is iterating faster than time.time's precision and
+thus all keys are identical
    
-   # All keys are identical
+   # [1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
+   #  1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
+   #  1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
+   #  1310422700.9400001]
+   print(keys)
+   
    assert not all([keys[0] == key for key in keys])     
       
-A KeypoolDict will generate unique integer keys that are reused when deleted:
+A KeypoolDict solves this problem in a cleaner fashion with unique interger keys:
 
    from keypool import KeypoolDict
    from operator import delitem
@@ -54,13 +65,16 @@ A KeypoolDict will generate unique integer keys that are reused when deleted:
       return key
    
    keys = [create_timer(...) for i in xrange(0, 10)]
+
+No keys are identical now!
    
    # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
    print(keys)   
    
-   # No keys are identical
    assert all([x == y for x,y in zip(sorted(set(keys)), sorted(keys))])
-   
+
+Keys are also reused when deleted, so arbitrarily increasing values are mostly avoided:
+
    # Delete all the items
    [delitem(timers, key) for key in timers.keys()]
    

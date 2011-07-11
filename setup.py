@@ -1,9 +1,9 @@
 ﻿#!/usr/bin/env python
 
 from distutils.core import setup
-from web import __version__
+from keypool import __version__
 
-setup(name='web.py',
+setup(name='keypool',
       version=__version__,
       description='keypool: generate dict keys',
       author='Charlie Liban',
