@@ -20,6 +20,29 @@ arbitrary.
       # Assign anything except an integer, like a normal dict
       items['hello'] = 'world'
 ```
+
+When an item is deleted, its key is freed for reuse:
+
+```python
+      from keypool import KeypoolDict
+      items = KeypoolDict()
+
+      # Add some items
+      keys = [items.setitem(word) for word in ['aardvark', 'baboon', 'crocodile']]
+
+      # [0, 1, 2]
+      print(keys)
+
+      # Delete 0
+      del items[key[0]]
+
+      # Add a new item
+      key = items.setitem('dragonfly')
+
+      # 0 (as opposed to 3)
+      print(key)             
+```
+
 ## Examples
 
 Let's say you're wrapping a timer function in some horrible API:
