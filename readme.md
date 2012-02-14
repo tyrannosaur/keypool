@@ -11,6 +11,8 @@ arbitrary.
 Only `setuptools` and Python 2.6+ are required. Type `python setup.py install` to install. 
 If you want to run the tests, ensure `nose` is installed with `easy_install -U nose`.
 
+The JavaScript version requires no dependencies or special interpreters. 
+
 ## The basics
 ```python
       from keypool import KeypoolDict
