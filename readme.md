@@ -84,7 +84,7 @@ Let's say you're wrapping a timer function in some horrible API:
             ...
 ```
             
-and each active timer needs to be stored for efficient lookup (i.e. a dict)
+and each active timer needs to be stored for efficient lookup (i.e. a dict).
 Usually a timestamp or uuid will suffice for this type of problem:
 
 ```python
@@ -100,8 +100,8 @@ Usually a timestamp or uuid will suffice for this type of problem:
       keys = [create_timer(...) for i in xrange(0, 10)]
 ```
 
-Oops, the loop is iterating faster than time.time's precision and
-thus all keys are identical
+Oops, the loop is iterating faster than ``time.time``'s precision and
+thus all keys are identical:
 
 ```python      
       # [1310422700.9400001, 1310422700.9400001, 1310422700.9400001, 
