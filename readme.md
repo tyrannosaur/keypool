@@ -3,8 +3,7 @@
 `keypool` is a library to generate and maintain a pool of unique integer keys. Priority is given to reusing
 freed keys rather than generating new ones.
 
-This package is meant for situations where keys for a dict are irrelevant or
-arbitrary.
+This package is meant for situations where keys for a dict are irrelevant or arbitrary.
 
 ## Installation
 
@@ -84,7 +83,7 @@ Let's say you're wrapping a timer function in some horrible API:
             ...
 ```
             
-and each active timer needs to be stored for efficient lookup (i.e. a dict).
+and each active timer needs to be stored for efficient lookup (i.e. a ``dict``).
 Usually a timestamp or uuid will suffice for this type of problem:
 
 ```python
@@ -113,7 +112,7 @@ thus all keys are identical:
       assert not all([keys[0] == key for key in keys])        
 ```
             
-A KeypoolDict solves this problem in a cleaner fashion with unique interger keys:
+A ``KeypoolDict`` solves this problem in a cleaner fashion with unique integer keys:
 
 ```python
       from keypool import KeypoolDict
