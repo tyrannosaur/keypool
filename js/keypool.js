@@ -5,7 +5,7 @@
      var pool = keyPool();        
      pool.newKey();                   // returns 0, which is allocated immedately
      pool.newKey();                   // returns 1
-     pool.delKey(0);                  // deletes 0
+     pool.del(0);                     // deletes 0
      pool.set('some value');          // assigns a value and returns its key                                    
      pool.get(0);                     // gets the value with key 0
 */
@@ -59,10 +59,10 @@ var keyPool = function() {
      'newKey' : function() {
         return newKey();
      },    
-     'delKey' : function(key) {
-        key = parseInt(key);
-        if (key < 0 || key > Infinity)
-           throw new ValueError();
+     'del' : function(k) {
+        var key = parseInt(k);
+        if (key < 0 || key > Infinity || isNaN(key))
+           return delete data[k];           
 
         var p = Math.floor(Math.random() * free.length);
         var d = 0;
