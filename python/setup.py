@@ -39,7 +39,9 @@ This package is meant for situations where keys for a dict are irrelevant or
 arbitrary.
 
 Typical usage:
-    
+
+::
+
    from keypool import KeypoolDict
    items = KeypoolDict()
    
