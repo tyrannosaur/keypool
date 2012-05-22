@@ -11,8 +11,8 @@ This package is meant for situations where keys for a dict are irrelevant or arb
 
 Only Python 2.6+ is required!
 
-Install with pip: `pip install keypool`
-Clone and install: `python python/setup.py install`
+* Install with pip: `pip install keypool`
+* Clone and install: `python python/setup.py install`
 
 If you want to run the tests, ensure `nose` is installed with `pip install nose`.
 
