@@ -9,8 +9,12 @@ This package is meant for situations where keys for a dict are irrelevant or arb
 
 ### Python
 
-Only `setuptools` and Python 2.6+ are required. Type `python setup.py install` to install. 
-If you want to run the tests, ensure `nose` is installed with `easy_install -U nose`.
+Only Python 2.6+ is required!
+
+Install with pip: `pip install keypool`
+Clone and install: `python python/setup.py install`
+
+If you want to run the tests, ensure `nose` is installed with `pip install nose`.
 
 ### JavaScript
 
